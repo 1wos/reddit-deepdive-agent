@@ -1,11 +1,15 @@
-# Reddit Deep-Dive Analyst
+# Reddit Deep-Dive Agent
 
 <p align="center">
-  <img src="./screenshots/logo.png" width="120" alt="Reddit Deep-Dive Analyst" />
+  <img src="./screenshots/logo.png" width="120" alt="Reddit Deep-Dive Agent" />
 </p>
 
 <p align="center">
   <strong>AI 에이전트가 Reddit을 자동 분석해서 AI 도구 시장 조사 리포트를 만들어주는 Agent</strong>
+</p>
+
+<p align="center">
+  <i>Built in ~3 hours · Seoul AI Builders Hackathon · Feb 7, 2026</i>
 </p>
 
 <p align="center">
@@ -70,26 +74,26 @@ Deploy:    Vercel
 
 ## 아키텍처
 
-```
-┌─────────────┐     POST /api/conversations     ┌──────────────┐
-│             │ ──────────────────────────────▶  │              │
-│   Next.js   │                                  │  Moru Cloud  │
-│   Frontend  │  ◀── polling (2s) ──────────────│  Sandbox     │
-│             │     GET /api/conversations/:id    │  (microVM)   │
-└─────────────┘                                  └──────┬───────┘
-       │                                                │
-       │                                    Claude Agent SDK
-       │                                    query() + WebSearch
-       ▼                                                │
-┌─────────────┐                                         ▼
-│  Supabase   │                              ┌──────────────────┐
-│  PostgreSQL │                              │  Reddit Threads  │
-│  (Prisma)   │                              │  via WebSearch   │
-└─────────────┘                              └──────────────────┘
+```mermaid
+flowchart LR
+    User([User Keyword]) --> FE[Next.js Frontend]
+    FE -- POST /api/conversations --> Sandbox
+    Sandbox -- polling 2s --> FE
+    Sandbox[Moru Cloud Sandbox<br/>Firecracker microVM]
+    Sandbox --> Agent[Claude Agent SDK<br/>WebSearch / WebFetch]
+    Agent --> Reddit[(Reddit Threads)]
+    FE <-- Prisma ORM --> DB[(Supabase<br/>PostgreSQL)]
+
+    classDef primary fill:#fff,stroke:#1591d6,stroke-width:2px,color:#0f1115
+    classDef storage fill:#f6f6f7,stroke:#6b7280,stroke-width:1.5px,color:#0f1115
+    classDef external fill:#fff7e6,stroke:#ff8c1a,stroke-width:1.5px,color:#0f1115
+    class FE,Sandbox,Agent primary
+    class DB,Reddit storage
+    class User external
 ```
 
 **동작 흐름:**
-1. 사용자가 AI 도구 키워드 입력 (예: "Cursor vs Claude Code")
+1. 사용자가 AI 도구 키워드 입력 (예: `"Cursor vs Claude Code"`)
 2. Next.js API가 Moru 샌드박스에 Claude 에이전트 실행
 3. 에이전트가 자율적으로 Reddit 검색 → 스레드 분석 → 리포트 작성 (최대 50턴)
 4. 프론트엔드가 2초 간격으로 폴링하며 실시간 메시지 표시
