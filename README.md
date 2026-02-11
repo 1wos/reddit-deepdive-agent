@@ -60,15 +60,9 @@ AI 도구를 선택할 때 가장 솔직한 정보는 Reddit에 있습니다.
 
 ## 기술 스택
 
-```
-Frontend:  Next.js 16 · React 19 · Tailwind CSS v4 · shadcn/ui
-Backend:   Next.js API Routes · Prisma ORM · Supabase PostgreSQL
-Agent:     Claude Agent SDK (@anthropic-ai/claude-agent-sdk)
-Sandbox:   Moru Cloud (Firecracker microVM)
-PDF:       jsPDF + html2canvas-pro
-Charts:    Mermaid.js
-Deploy:    Vercel
-```
+[![Stack](https://skillicons.dev/icons?i=nextjs,react,ts,tailwind,prisma,supabase,vercel)](https://skillicons.dev)
+
+**AI / Infra:** [Claude Agent SDK](https://platform.claude.com/docs/en/agent-sdk/overview) · [Moru Cloud](https://moru.io) Sandbox (Firecracker microVM) · shadcn/ui · Mermaid.js · jsPDF + html2canvas-pro
 
 ---
 
@@ -122,31 +116,8 @@ MIT
 
 ## English
 
-### What is this?
+A web app where a Claude AI agent autonomously searches and analyzes Reddit to generate structured market research reports on AI tools. Type a keyword like `"Cursor vs Claude Code"` and get a comprehensive report — sentiment charts, feature comparisons, pricing breakdowns, and pain point mapping — in about 5 minutes.
 
-**Reddit Deep-Dive Analyst** is a web app where a Claude AI agent autonomously searches and analyzes Reddit to generate structured market research reports on AI tools.
+Built in ~3 hours during the **Seoul AI Builders Hackathon** (Feb 7, 2026) using **Claude Agent SDK** on **Moru Cloud** sandboxes.
 
-Instead of manually reading hundreds of English Reddit threads, just type a keyword like `"Cursor vs Claude Code"` and get a comprehensive report with sentiment analysis charts, feature comparisons, pricing breakdowns, and pain point mapping — in about 5 minutes.
-
-### Key Features
-
-- **Autonomous Reddit Research** — Claude agent uses WebSearch/WebFetch to crawl Reddit threads
-- **Structured Reports** — Overview, performance, pricing, community feedback, pain points
-- **Mermaid Charts** — Auto-generated pie charts, bar charts, and flow diagrams
-- **Real-time Progress** — 6-step processing indicator showing agent's current task
-- **Report Downloads** — Full PDF, 1-page summary PDF, and Markdown formats
-- **Conversation History** — Past analyses saved in Supabase, accessible from sidebar
-- **Dark/Light Mode** — Orange-themed UI with mode toggle
-- **Multilingual** — Responds in the same language as the user's input
-
-### Tech Stack
-
-- **Frontend**: Next.js 16, React 19, Tailwind CSS v4, shadcn/ui
-- **Backend**: Next.js API Routes, Prisma ORM, Supabase PostgreSQL
-- **Agent**: Claude Agent SDK running in Moru Cloud Sandbox (Firecracker microVM)
-- **PDF**: jsPDF + html2canvas-pro
-- **Charts**: Mermaid.js
-- **Deploy**: Vercel
-
-
-See the Korean section above for detailed setup instructions.
+> See the Korean sections above for full feature list, tech stack, and architecture diagram.
